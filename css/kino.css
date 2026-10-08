@@ -1,0 +1,455 @@
+/* Kino: fælles udseende for hele websitet.
+   Idéen er en biografsal: mørk vinrød som fløjlstæppet, rød som hovedfarve og guld som pærerne på skiltet.
+   Bootstrap står for gitter, knapper og formularer. Her ændres dens farver og tilføjes Kinos egne dele.
+   Siden er lavet til computer-skærm (ikke telefon), som gruppen har valgt. */
+
+/* ---------- Farver og skrifter ---------- */
+:root {
+    --kino-bg: #1a0f14;        /* baggrund: meget mørk vinrød */
+    --kino-surface: #25161d;   /* kort og paneler */
+    --kino-raised: #331e28;    /* felter, der ligger oven på et panel */
+    --kino-line: #4a2e3a;      /* streger og kanter */
+    --kino-text: #f5ece8;
+    --kino-muted: #c2aeb0;
+    --kino-red: #d92b3f;       /* hovedfarve */
+    --kino-red-dark: #b21f31;
+    --kino-gold: #f2c14e;      /* fremhævning: premiere, valgte sæder */
+    --kino-green: #5fc79b;     /* ledig / betalt / ren */
+
+    --kino-font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+    --kino-font-body: "Albert Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --kino-radius: 14px;
+    --kino-shadow: 0 10px 28px rgba(8, 2, 5, 0.55);
+}
+
+/* Bootstraps egne variabler sættes til Kinos farver (siderne bruger data-bs-theme="dark") */
+[data-bs-theme="dark"] {
+    --bs-body-bg: var(--kino-bg);
+    --bs-body-color: var(--kino-text);
+    --bs-body-font-family: var(--kino-font-body);
+    --bs-secondary-color: var(--kino-muted);
+    --bs-border-color: var(--kino-line);
+    --bs-border-radius: 10px;
+    --bs-link-color-rgb: 242, 193, 78;
+    --bs-link-hover-color-rgb: 250, 215, 130;
+    --bs-emphasis-color: var(--kino-text);
+    --bs-tertiary-bg: var(--kino-raised);
+}
+
+body {
+    min-width: 1100px;            /* kun computer-skærm */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.02rem;
+    line-height: 1.55;
+}
+main { flex: 1; }
+
+h1, h2, h3, .kino-heading {
+    font-family: var(--kino-font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+h1 { font-size: 2.6rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.25rem; }
+.lead { color: var(--kino-muted); max-width: 62ch; }
+
+/* Synligt fokus, så siden kan bruges med tastatur */
+:focus-visible {
+    outline: 3px solid var(--kino-gold);
+    outline-offset: 2px;
+}
+
+/* ---------- Knapper og formularer ---------- */
+.btn { border-radius: 999px; font-weight: 600; padding-inline: 1.15rem; background-image: none; }
+.btn-sm { padding-inline: 0.85rem; }
+.btn-primary {
+    --bs-btn-bg: var(--kino-red);
+    --bs-btn-border-color: var(--kino-red);
+    --bs-btn-hover-bg: var(--kino-red-dark);
+    --bs-btn-hover-border-color: var(--kino-red-dark);
+    --bs-btn-active-bg: var(--kino-red-dark);
+    --bs-btn-active-border-color: var(--kino-red-dark);
+    --bs-btn-disabled-bg: var(--kino-line);
+    --bs-btn-disabled-border-color: var(--kino-line);
+    --bs-btn-color: #fff;
+}
+.btn-danger {
+    --bs-btn-bg: var(--kino-red);
+    --bs-btn-border-color: var(--kino-red);
+    --bs-btn-hover-bg: var(--kino-red-dark);
+    --bs-btn-hover-border-color: var(--kino-red-dark);
+}
+.btn-gold {
+    --bs-btn-bg: var(--kino-gold);
+    --bs-btn-border-color: var(--kino-gold);
+    --bs-btn-color: #2a1a05;
+    --bs-btn-hover-bg: #f7d27a;
+    --bs-btn-hover-border-color: #f7d27a;
+    --bs-btn-hover-color: #2a1a05;
+    --bs-btn-active-bg: #f7d27a;
+    --bs-btn-active-color: #2a1a05;
+}
+.form-control, .form-select {
+    background-color: var(--kino-raised);
+    border-color: var(--kino-line);
+    color: var(--kino-text);
+}
+.form-control:focus, .form-select:focus {
+    background-color: var(--kino-raised);
+    border-color: var(--kino-gold);
+    box-shadow: 0 0 0 0.2rem rgba(242, 193, 78, 0.25);
+    color: var(--kino-text);
+}
+.form-label { font-weight: 600; }
+.form-text { color: var(--kino-muted); }
+.modal-content { background: var(--kino-surface); border-color: var(--kino-line); border-radius: var(--kino-radius); }
+
+/* ---------- Menu og sidefod ---------- */
+.kino-navbar {
+    background: rgba(26, 15, 20, 0.94);
+    border-bottom: 1px solid var(--kino-line);
+    backdrop-filter: blur(6px);
+    padding-block: 0.6rem;
+}
+.kino-navbar .nav-link { color: var(--kino-muted); font-weight: 600; padding-inline: 0.9rem; border-radius: 999px; }
+.kino-navbar .nav-link:hover { color: var(--kino-text); }
+.kino-navbar .nav-link.active { color: var(--kino-text); background: var(--kino-raised); }
+.kino-navbar .navbar-text { color: var(--kino-muted); white-space: nowrap; }
+.kino-navbar .btn { white-space: nowrap; }
+.kino-navbar-staff .nav-link { padding-inline: 0.6rem; font-size: 0.97rem; }
+
+.kino-logo { display: inline-flex; align-items: center; gap: 0.55rem; }
+.kino-logo-mark { width: 40px; height: 32px; }
+.kino-logo-text { font-family: var(--kino-font-heading); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; color: var(--kino-text); }
+.kino-staff-tag {
+    margin-left: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--kino-gold);
+    border: 1px solid var(--kino-gold);
+    border-radius: 999px;
+    padding: 0.1rem 0.6rem;
+}
+
+.kino-footer {
+    margin-top: 4rem;
+    padding-block: 2.2rem;
+    border-top: 1px solid var(--kino-line);
+    background: var(--kino-surface);
+    color: var(--kino-muted);
+    font-size: 0.95rem;
+}
+.kino-footer .container { display: grid !important; grid-template-columns: 1.2fr 1.4fr 1.4fr 1fr; }
+.kino-footer-title { font-family: var(--kino-font-heading); font-weight: 600; color: var(--kino-text); margin-bottom: 0.3rem; }
+
+/* ---------- Beskeder ---------- */
+.kino-toast { background: var(--kino-raised); color: var(--kino-text); border: 1px solid var(--kino-line); border-radius: 12px; box-shadow: var(--kino-shadow); }
+.kino-toast-success { border-left: 5px solid var(--kino-green); }
+.kino-toast-error { border-left: 5px solid var(--kino-red); }
+.kino-empty {
+    color: var(--kino-muted);
+    border: 1px dashed var(--kino-line);
+    border-radius: var(--kino-radius);
+    padding: 1.4rem 1.6rem;
+    margin: 0;
+}
+
+/* ---------- Plakater ---------- */
+.kino-poster {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: var(--kino-radius);
+    background: var(--kino-raised);
+}
+/* Tegnet plakat til film uden billede. Farven kommer fra --poster-hue, som sættes i ui.js */
+.kino-poster-generated {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    padding: 1.1rem;
+    background:
+        radial-gradient(120% 80% at 80% 0%, hsl(var(--poster-hue) 70% 58% / 0.9), transparent 60%),
+        linear-gradient(160deg, hsl(calc(var(--poster-hue) + 30) 55% 30%), hsl(calc(var(--poster-hue) - 20) 60% 12%));
+    color: #fff;
+    overflow: hidden;
+}
+.kino-poster-title { font-family: var(--kino-font-heading); font-weight: 700; font-style: italic; font-size: 1.7rem; line-height: 1.05; overflow-wrap: anywhere; }
+.kino-poster-director { font-size: 0.85rem; opacity: 0.85; }
+
+/* ---------- Filmkort ---------- */
+.kino-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
+.kino-card { display: block; color: inherit; text-decoration: none; }
+.kino-card-poster { position: relative; box-shadow: var(--kino-shadow); border-radius: var(--kino-radius); transition: transform 0.18s ease; }
+.kino-card:hover .kino-card-poster, .kino-card:focus-visible .kino-card-poster { transform: translateY(-6px); }
+.kino-card-badges { position: absolute; top: 0.7rem; left: 0.7rem; right: 0.7rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.kino-card-body { padding-top: 0.9rem; }
+.kino-card-title { margin: 0 0 0.3rem; font-size: 1.3rem; }
+
+.kino-age {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.6rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: rgba(20, 10, 14, 0.85);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.kino-status { padding: 0.2rem 0.7rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700; }
+.kino-status-premiere { background: var(--kino-gold); color: #2a1a05; }
+.kino-status-coming_soon { background: #fff; color: #2a1a05; }
+
+.kino-facts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; color: var(--kino-muted); font-size: 0.93rem; }
+.kino-facts .bi { color: var(--kino-gold); }
+
+/* ---------- Forsidens store felt ---------- */
+.kino-hero {
+    position: relative;
+    border-bottom: 1px solid var(--kino-line);
+    background:
+        radial-gradient(70% 120% at 85% 20%, hsl(var(--poster-hue, 350) 60% 38% / 0.55), transparent 65%),
+        linear-gradient(180deg, #2b141c, var(--kino-bg));
+}
+.kino-hero-inner { display: grid; grid-template-columns: 1fr 300px; gap: 3.5rem; align-items: center; padding-block: 3.5rem; }
+.kino-hero h1 { font-size: 4.4rem; line-height: 0.98; margin: 0.8rem 0 1rem; font-style: italic; }
+.kino-hero-text { font-size: 1.15rem; max-width: 52ch; color: var(--kino-text); }
+.kino-hero .kino-poster { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6); transform: rotate(2.5deg); }
+.kino-hero-tags { display: flex; align-items: center; gap: 0.6rem; }
+.kino-hero-tags .kino-age { margin-left: 0; }
+
+.kino-section { padding-top: 3rem; }
+.kino-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.3rem; }
+.kino-section-head h2 { margin: 0; }
+
+/* Søgefelt og genre-knapper */
+.kino-search { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.kino-search .form-control { max-width: 320px; border-radius: 999px; padding-inline: 1.1rem; }
+.kino-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.kino-chip {
+    border: 1px solid var(--kino-line);
+    background: transparent;
+    color: var(--kino-muted);
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+.kino-chip:hover { color: var(--kino-text); border-color: var(--kino-muted); }
+.kino-chip[aria-pressed="true"] { background: var(--kino-gold); border-color: var(--kino-gold); color: #2a1a05; }
+
+/* ---------- Program: forestillinger pr. dag ---------- */
+.kino-day { margin-bottom: 2.2rem; }
+.kino-day-title { font-size: 1.35rem; margin-bottom: 0.8rem; }
+/* Stort begyndelsesbogstav: "fredag 9. oktober" bliver til "Fredag 9. oktober" */
+.kino-capital { display: block; }
+td.kino-capital { display: table-cell; }
+.kino-capital::first-letter, .kino-day-title::first-letter { text-transform: uppercase; }
+.kino-showing {
+    display: grid;
+    grid-template-columns: 90px 1fr auto auto;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--kino-surface);
+    border: 1px solid var(--kino-line);
+    border-radius: var(--kino-radius);
+    margin-bottom: 0.6rem;
+}
+.kino-showing-time { font-family: var(--kino-font-heading); font-size: 1.6rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.kino-showing-title { font-weight: 700; font-size: 1.1rem; color: var(--kino-text); text-decoration: none; }
+.kino-showing-title:hover { text-decoration: underline; }
+.kino-showing-meta { color: var(--kino-muted); font-size: 0.93rem; }
+.kino-soldout { color: var(--kino-muted); font-weight: 700; border: 1px solid var(--kino-line); border-radius: 999px; padding: 0.35rem 1rem; }
+
+/* Tider som knapper på filmsiden og i "I dag" */
+.kino-times { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.kino-time {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 92px;
+    padding: 0.45rem 0.9rem;
+    border-radius: 12px;
+    border: 1px solid var(--kino-line);
+    background: var(--kino-raised);
+    color: var(--kino-text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.kino-time:hover { border-color: var(--kino-gold); transform: translateY(-2px); color: var(--kino-text); }
+.kino-time strong { font-family: var(--kino-font-heading); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.kino-time span { font-size: 0.8rem; color: var(--kino-muted); }
+.kino-time.is-soldout { opacity: 0.55; pointer-events: none; }
+
+/* ---------- Paneler ---------- */
+.kino-panel {
+    background: var(--kino-surface);
+    border: 1px solid var(--kino-line);
+    border-radius: var(--kino-radius);
+    box-shadow: var(--kino-shadow);
+    padding: 1.6rem;
+}
+
+/* ---------- Trin-indikator i bookingen ---------- */
+.kino-steps { list-style: none; display: flex; gap: 0.6rem; padding: 0; margin: 0 0 2rem; counter-reset: step; }
+.kino-steps li {
+    counter-increment: step;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--kino-line);
+    color: var(--kino-muted);
+    font-weight: 600;
+}
+.kino-steps li::before {
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background: var(--kino-raised);
+    font-variant-numeric: tabular-nums;
+}
+.kino-steps li.is-current { border-color: var(--kino-gold); color: var(--kino-text); }
+.kino-steps li.is-current::before { background: var(--kino-gold); color: #2a1a05; }
+.kino-steps li.is-done::before { content: "\2713"; background: var(--kino-green); color: #0d2a1e; }
+
+/* ---------- Sædekort ---------- */
+.kino-screen {
+    margin: 0 auto 2.2rem;
+    width: 78%;
+    height: 34px;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.15));
+    box-shadow: 0 -6px 40px rgba(255, 255, 255, 0.35);
+    color: #2a1a05;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 30px;
+}
+.kino-seatmap { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.kino-seatrow { display: flex; align-items: center; gap: 5px; }
+.kino-rowlabel { width: 2rem; text-align: center; color: var(--kino-muted); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+.kino-seat {
+    width: 24px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    border-radius: 7px 7px 4px 4px;
+    background: #6d4a58;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+.kino-seat:hover { background: #9a6f80; transform: translateY(-2px); }
+.kino-seat.is-booked { background: transparent; border: 1px solid var(--kino-line); cursor: not-allowed; transform: none; }
+.kino-seat.is-booked::after { content: "\00d7"; color: var(--kino-line); font-size: 0.9rem; line-height: 1; }
+.kino-seat.is-selected { background: var(--kino-gold); }
+.kino-legend { display: flex; justify-content: center; gap: 1.8rem; margin-top: 1.6rem; color: var(--kino-muted); font-size: 0.93rem; }
+.kino-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.kino-legend .kino-seat { cursor: default; pointer-events: none; }
+
+/* Resumé ved siden af sædekortet */
+.kino-summary { position: sticky; top: 90px; }
+.kino-summary dl { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; margin: 0; }
+.kino-summary dt { color: var(--kino-muted); font-weight: 400; }
+.kino-summary dd { margin: 0; text-align: right; }
+.kino-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--kino-line); margin-top: 1rem; padding-top: 1rem; }
+.kino-total strong { font-family: var(--kino-font-heading); font-size: 1.9rem; font-variant-numeric: tabular-nums; }
+.kino-qty { display: grid; grid-template-columns: 1fr 86px; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+/* ---------- Billetten ---------- */
+.kino-ticket {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    max-width: 780px;
+    margin-inline: auto;
+    background: #f7efe6;
+    color: #2a1a1f;
+    border-radius: 18px;
+    box-shadow: var(--kino-shadow);
+    position: relative;
+}
+.kino-ticket-main { padding: 1.8rem 2rem; }
+.kino-ticket-main h1 { font-size: 2.4rem; font-style: italic; margin: 0.2rem 0 1rem; color: #2a1a1f; }
+.kino-ticket-stub {
+    padding: 1.8rem 1.5rem;
+    border-left: 3px dashed #c9b8a8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    text-align: center;
+}
+/* De to halvcirkler, der ligner hullerne i en billet */
+.kino-ticket::before, .kino-ticket::after {
+    content: "";
+    position: absolute;
+    right: 236px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--kino-bg);
+}
+.kino-ticket::before { top: -14px; }
+.kino-ticket::after { bottom: -14px; }
+.kino-ticket dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem 1.5rem; margin: 0; }
+.kino-ticket dt { font-size: 0.8rem; color: #7a6468; font-weight: 600; }
+.kino-ticket dd { margin: 0; font-weight: 700; font-size: 1.05rem; }
+.kino-ticket-qr { width: 190px; height: 190px; border-radius: 8px; background: #fff; }
+.kino-ticket-number { font-family: var(--kino-font-heading); font-size: 1.3rem; font-weight: 700; }
+.kino-pill { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; }
+.kino-pill-ok { background: #cfeedd; color: #0f4a30; }
+.kino-pill-wait { background: #f6dfb0; color: #5a3d00; }
+.kino-pill-bad { background: #f6cdd2; color: #7a1321; }
+
+/* ---------- Sale ---------- */
+.kino-hall { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: center; }
+.kino-hall-number { font-family: var(--kino-font-heading); font-size: 3.4rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.kino-minimap { display: grid; gap: 2px; }
+.kino-minimap i { display: block; aspect-ratio: 1; border-radius: 2px; background: #6d4a58; }
+
+/* ---------- Personalesider ---------- */
+.kino-table { --bs-table-bg: transparent; --bs-table-border-color: var(--kino-line); --bs-table-color: var(--kino-text); vertical-align: middle; }
+.kino-table th { color: var(--kino-muted); font-weight: 600; font-size: 0.9rem; }
+.kino-table th, .kino-table td { white-space: nowrap; }
+.kino-table td:first-child { white-space: normal; }
+.kino-table .form-control { min-width: 120px; }
+.kino-actions { display: flex; gap: 0.4rem; justify-content: flex-end; }
+.kino-tile {
+    display: block;
+    padding: 1.4rem;
+    background: var(--kino-surface);
+    border: 1px solid var(--kino-line);
+    border-radius: var(--kino-radius);
+    color: var(--kino-text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.kino-tile:hover { border-color: var(--kino-gold); transform: translateY(-3px); color: var(--kino-text); }
+.kino-tile .bi { font-size: 1.7rem; color: var(--kino-gold); }
+.kino-tile h2 { font-size: 1.25rem; margin: 0.6rem 0 0.2rem; }
+.kino-tile p { margin: 0; color: var(--kino-muted); font-size: 0.95rem; }
+
+/* Brugere, der har bedt om mindre bevægelse, får ingen animationer */
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
